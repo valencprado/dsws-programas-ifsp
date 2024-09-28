@@ -16,6 +16,10 @@ def contexto_requisicao():
   browser = request.headers.get('User-Agent')
   return '<p>{}</p>'.format(browser)
 
+@app.route('/codigostatusdiferente')
+def codigo_status_diferente():
+   return 'Bad Request', 400
+
 @app.route('/objetoresposta')
 def objeto_resposta():
    response = make_response('<h1>This site has a cookie!</h1>')
