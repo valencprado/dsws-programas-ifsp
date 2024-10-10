@@ -1,4 +1,5 @@
 from flask import Flask, request
+from flask_bootstrap import Bootstrap
 
 app = Flask(__name__)
 
@@ -10,7 +11,7 @@ def hello_world():
 @app.route('/user/<name>/<register>/<institution>')
 def user(name, register, institution):
     return '<h1>Avaliação Contínua: Aula 030</h1><h1>Aluno: {n}</h1><h1>Prontuário: {r}</h1><h1>Instituição: {i}</h1> <a href="/">Voltar</a>'.format(n = name, r=register, i=institution)
- 
+
 
 @app.route('/contextorequisicao')
 def contexto_requisicao():
