@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template
+from flask import Flask, render_template
 from flask_bootstrap import Bootstrap
 from flask_moment import Moment
 from datetime import datetime, UTC
@@ -23,5 +23,5 @@ def page_not_found(e):
     return render_template('404.html'), 404
 
 @app.errorhandler(500)
-def page_not_found(e):
+def page_internal_server_error(e):
     return render_template('500.html'), 500
