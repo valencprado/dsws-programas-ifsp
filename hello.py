@@ -1,8 +1,8 @@
 from flask import Flask, render_template
 from flask_bootstrap import Bootstrap
 from flask_moment import Moment
-from datetime import datetime, UTC
-
+# from datetime import datetime, UTC
+from datetime import datetime
 
 app = Flask(__name__)
 bootstrap = Bootstrap(app)
@@ -10,7 +10,7 @@ moment = Moment(app)
 
 @app.route('/')
 def hello_world():
-   now = datetime.now(UTC)
+   now = datetime.utcnow()
    return render_template('index.html', current_time=now)
 
 
