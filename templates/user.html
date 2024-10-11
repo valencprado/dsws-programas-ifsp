@@ -1,0 +1,21 @@
+{%extends "bootstrap/base.html" %}
+{% block title%}Flasky {% endblock %}
+{% block head %}
+{{ super() }}
+
+{% endblock %}
+{% block navbar%}
+<div class="navbar navbar-inverse" role="navigation">
+    <div class="container">
+  
+    </div>
+
+</div>
+{% endblock %}
+{% block content%}
+<div class="container">
+    {{ super() }}
+   <h1> Hello, {{name}}!</h1>
+</div>
+
+{% endblock %}
