@@ -3,10 +3,12 @@ from flask_bootstrap import Bootstrap
 from flask_moment import Moment
 # from datetime import datetime, UTC
 from datetime import datetime
+from forms import NameForm
 
 app = Flask(__name__)
 bootstrap = Bootstrap(app)
 moment = Moment(app)
+app.config['SECRET_KEY'] = 'oRcm36otmAKZ9xLxJokVoCj312RH1qIp1kJEOMzku2CVmDwADQMf5Wu9KIlaCMXE'
 
 @app.route('/')
 def hello_world():
@@ -25,6 +27,15 @@ def contexto_requisicao(name):
     ip = request.remote_addr
     host = request.host
     return render_template('contexto_requisicao.html',name=name, browser=browser, ip=ip, host=host)
+
+@app.route('/form', methods=['GET', 'POST'])
+def form():
+    name = None
+    form = NameForm()
+    if form.validate_on_submit():
+        name = form.name.data
+        form.name.data = ''
+    return render_template('form.html', form=form, name=name)
 @app.errorhandler(404)
 def page_not_found(e):
     return render_template('404.html'), 404
