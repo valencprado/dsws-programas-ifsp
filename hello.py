@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template
+from flask import Flask, request, render_template, session, redirect, url_for, flash
 from flask_bootstrap import Bootstrap
 from flask_moment import Moment
 # from datetime import datetime, UTC
@@ -19,7 +19,7 @@ def hello_world():
 
 @app.route('/user/<name>/<register>/<institution>')
 def user(name, register, institution):
-    return render_template('user.html', name=name, register=register, institution=institution)
+    return render_template('user.html', name=session.get('name'), register=register, institution=institution)
 
 @app.route('/contextorequisicao/<name>')
 def contexto_requisicao(name):
@@ -30,12 +30,15 @@ def contexto_requisicao(name):
 
 @app.route('/form', methods=['GET', 'POST'])
 def form():
-    name = None
     form = NameForm()
     if form.validate_on_submit():
-        name = form.name.data
+        old_name = session.get('name')
+        if old_name is not None and old_name != form.name.data:
+            flash('Novo nome! Bonito, hein?')
+        session['name'] = form.name.data
         form.name.data = ''
-    return render_template('form.html', form=form, name=name)
+        return redirect(url_for('form'))
+    return render_template('form.html', form=form, name=session.get('name'))
 @app.errorhandler(404)
 def page_not_found(e):
     return render_template('404.html'), 404
