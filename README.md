@@ -4,3 +4,4 @@ Códigos da matéria de "Desenvolvimento Web: Servidor" do Instituto Federal de 
 ## Libs instaladas
 - flask-bootstrap
 - flask-moment
+- flask-wtforms
