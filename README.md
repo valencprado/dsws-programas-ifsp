@@ -5,6 +5,8 @@ Códigos da matéria de "Desenvolvimento Web: Servidor" do Instituto Federal de 
 - flask-bootstrap
 - flask-moment
 - flask-wtforms
+- flask-sqlalchemy
+- flask-migrate
 
 ## Executar projeto
 1. Criar ambiente virtual
