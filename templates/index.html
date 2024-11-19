@@ -17,21 +17,21 @@
 <div class="container">
     <h2>Relação de usuários cadastrados</h2>
 
-    <table>
+    <table class="table">
         <tr>
             <th>Nome do usuário</th>
             <th>Função</th>
         </tr>
+        {% for user in users %}
         <tr>
-            {% for user in users %}
             <td>
                 {{user.username}}
             </td>
             <td>
-                {{user.role.name }}
+                {{user.role.name if user.role else 'User'}}
             </td>
-            {%endfor%}
         </tr>
+            {%endfor%}
     </table>
 </div>
 {% endblock %}
