@@ -16,7 +16,7 @@
 
 <div class="container">
     <h2>Relação de usuários cadastrados</h2>
-
+    <h4>Quantidade: {{users_count}}</h4>
     <table class="table">
         <tr>
             <th>Nome do usuário</th>
@@ -28,7 +28,32 @@
                 {{user.username}}
             </td>
             <td>
-                {{user.role.name if user.role else 'User'}}
+                {{user.role.name if user.role}}
+            </td>
+        </tr>
+            {%endfor%}
+    </table>   
+    
+    <h2>Relação de funções cadastradas</h2>
+    <h4>Quantidade: {{roles_count}}</h4>
+    <table class="table">
+        <tr>
+            <th>Funções</th>
+            <th>Usuários</th>
+        </tr>
+        {% for role in roles %}
+        <tr>
+            <td>
+                {{role.name}}
+            </td>
+            <td>
+                <ol>
+            {%for user in role.users.all()%}
+                <li>
+                    {{user.username}}
+                </li>
+                {%endfor%}
+            </ol>
             </td>
         </tr>
             {%endfor%}
