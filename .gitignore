@@ -7,6 +7,7 @@ __pycache__/
 # Ignore virtual environment directories
 venv/
 env/
+.env
 
 # Pythonanywhere files
 pythonanywhere
