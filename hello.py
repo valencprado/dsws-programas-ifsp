@@ -92,6 +92,7 @@ def index():
     form = NameForm()
     if form.validate_on_submit():
         user = User.query.filter_by(username=form.name.data).first()
+        users = User.query.all()
         if user is None:
             user = User(username=form.name.data)
             db.session.add(user)
@@ -120,4 +121,4 @@ def index():
         session['name'] = form.name.data
         return redirect(url_for('index'))
     return render_template('index.html', form=form, name=session.get('name'),
-                           known=session.get('known', False))
+                           known=session.get('known', False), users=users)
