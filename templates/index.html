@@ -21,16 +21,16 @@
             <th>Nome do usuário</th>
             <th>Função</th>
         </tr>
+        {% for user in users %}
         <tr>
-            {% for user in users %}
             <td>
                 {{user.username}}
             </td>
             <td>
                 {{user.role.name }}
             </td>
-            {%endfor%}
         </tr>
+        {%endfor%}
     </table>
 </div>
 {% endblock %}

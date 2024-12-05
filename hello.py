@@ -89,10 +89,10 @@ def internal_server_error(e):
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
+    users = User.query.all()
     form = NameForm()
     if form.validate_on_submit():
         user = User.query.filter_by(username=form.name.data).first()
-        users = User.query.all()
         if user is None:
             user = User(username=form.name.data)
             db.session.add(user)
