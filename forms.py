@@ -1,7 +1,8 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField
+from wtforms import StringField, SubmitField, BooleanField
 from wtforms.validators import DataRequired
 
 class NameForm(FlaskForm):
-    name = StringField('What is your name?', validators=[DataRequired()])
+    name = StringField('Qual é o seu nome?', validators=[DataRequired()])
+    is_sendable = BooleanField('Deseja enviar e-mail para flaskaulasweb@zohomail.com?')
     submit = SubmitField('Submit')

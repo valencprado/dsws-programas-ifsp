@@ -14,5 +14,23 @@
 </div>
 {{ wtf.quick_form(form) }}
 
-
+<div class="container">
+    <h2>Relação de usuários cadastrados</h2>
+    <table class="table">
+        <tr>
+            <th>Nome do usuário</th>
+            <th>Função</th>
+        </tr>
+        <tr>
+            {% for user in users %}
+            <td>
+                {{user.username}}
+            </td>
+            <td>
+                {{user.role.name }}
+            </td>
+            {%endfor%}
+        </tr>
+    </table>
+</div>
 {% endblock %}
