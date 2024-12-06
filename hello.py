@@ -99,7 +99,7 @@ def index():
             db.session.add(user)
             db.session.commit()
             session['known'] = False
-            is_sendable = form.dada.is_sendable
+            is_sendable = form.is_sendable.data
             print('Verificando variáveis de ambiente: Server log do PythonAnyWhere', flush=True)
             print('FLASKY_ADMIN: ' + str(app.config['FLASKY_ADMIN']), flush=True)
             print('URL: ' + str(app.config['API_URL']), flush=True)
@@ -110,7 +110,7 @@ def index():
             print('text: ' + "Novo usuário cadastrado: " + form.name.data, flush=True)
 
             if app.config['FLASKY_ADMIN']:                
-                if is_sendable:
+                if is_sendable is True:
                     to = [app.config['FLASKY_ADMIN'], "flaskaulasweb@zohomail.com"] 
                 else:
                     to = [app.config['FLASKY_ADMIN']] 
