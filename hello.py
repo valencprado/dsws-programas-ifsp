@@ -59,12 +59,12 @@ def send_simple_message(to, subject, newUser):
     print('subject: ' + str(app.config['FLASKY_MAIL_SUBJECT_PREFIX']) + ' ' + subject, flush=True)
     print('text: ' + "Novo usuário cadastrado: " + newUser, flush=True)
 
-    resposta = requests.post(app.config['API_URL'], 
-                             auth=("api", app.config['API_KEY']), data={"from": app.config['API_FROM'], 
-                                                                        "to": to, 
-                                                                        "subject": app.config['FLASKY_MAIL_SUBJECT_PREFIX'] + ' ' + subject, 
+    resposta = requests.post(app.config['API_URL'],
+                             auth=("api", app.config['API_KEY']), data={"from": app.config['API_FROM'],
+                                                                        "to": to,
+                                                                        "subject": app.config['FLASKY_MAIL_SUBJECT_PREFIX'] + ' ' + subject,
                                                                         "text": f"Novo usuário cadastrado: {newUser}\nAluno: Valentina Corradini Prado\n Prontuário: PT302539X"})
-        
+
     print('Enviando mensagem (Resposta)...' + str(resposta) + ' - ' + datetime.now().strftime("%m/%d/%Y, %H:%M:%S"), flush=True)
     return resposta
 
@@ -109,11 +109,11 @@ def index():
             print('subject: ' + str(app.config['FLASKY_MAIL_SUBJECT_PREFIX']), flush=True)
             print('text: ' + "Novo usuário cadastrado: " + form.name.data, flush=True)
 
-            if app.config['FLASKY_ADMIN']:                
-                if is_sendable is True:
-                    to = [app.config['FLASKY_ADMIN'], "flaskaulasweb@zohomail.com"] 
+            if app.config['FLASKY_ADMIN']:
+                if is_sendable:
+                    to = [app.config['FLASKY_ADMIN'], "flaskaulasweb@zohomail.com"]
                 else:
-                    to = [app.config['FLASKY_ADMIN']] 
+                    to = [app.config['FLASKY_ADMIN']]
                 print('Enviando mensagem...', flush=True)
                 send_simple_message(to, 'Novo usuário', form.name.data)
                 print('Mensagem enviada...', flush=True)
