@@ -95,7 +95,7 @@ def index():
         user = User.query.filter_by(username=form.name.data).first()
         if user is None:
             user_role =  Role.query.filter_by(name='User').first()
-            user = User(username=form.name.data, role_id=user_role)
+            user = User(username=form.name.data, role=user_role)
             db.session.add(user)
             db.session.commit()
             session['known'] = False
