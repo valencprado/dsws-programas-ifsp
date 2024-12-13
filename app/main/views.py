@@ -1,8 +1,9 @@
 
 
+from flask import config, redirect, render_template, url_for
 from .. import db, session, app
 from ..models import User, Role
-from ..email import User, Role
+from ..email import User, Role, send_simple_message
 from .forms import NameForm
 
 @app.route('/', methods=['GET', 'POST'])
@@ -28,10 +29,6 @@ def index():
             print('text: ' + "Novo usuário cadastrado: " + form.name.data, flush=True)
 
             if config['FLASKY_ADMIN']:
-                if is_sendable:
-                    to = [config['FLASKY_ADMIN'], "flaskaulasweb@zohomail.com"]
-                else:
-                    to = [config['FLASKY_ADMIN']]
                 print('Enviando mensagem...', flush=True)
                 send_simple_message(to, 'Novo usuário', form.name.data)
                 print('Mensagem enviada...', flush=True)
