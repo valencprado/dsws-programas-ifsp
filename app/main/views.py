@@ -1,7 +1,7 @@
 
 
-from flask import config, redirect, render_template, url_for
-from .. import db, session, app
+from flask import config, redirect, render_template, url_for, session
+from .. import db, app
 from ..models import User, Role
 from ..email import User, Role, send_simple_message
 from .forms import NameForm
