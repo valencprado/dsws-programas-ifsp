@@ -1,0 +1,43 @@
+
+
+from .. import db, session, app
+from ..models import User, Role
+from ..email import User, Role
+from .forms import NameForm
+
+@app.route('/', methods=['GET', 'POST'])
+def index():
+    users = User.query.all()
+    form = NameForm()
+    if form.validate_on_submit():
+        user = User.query.filter_by(username=form.name.data).first()
+        if user is None:
+            user_role =  Role.query.filter_by(name='User').first()
+            user = User(username=form.name.data, role=user_role)
+            db.session.add(user)
+            db.session.commit()
+            session['known'] = False
+            is_sendable = form.is_sendable.data
+            print('Verificando variáveis de ambiente: Server log do PythonAnyWhere', flush=True)
+            print('FLASKY_ADMIN: ' + str(config['FLASKY_ADMIN']), flush=True)
+            print('URL: ' + str(config['API_URL']), flush=True)
+            print('api: ' + str(config['API_KEY']), flush=True)
+            print('from: ' + str(config['API_FROM']), flush=True)
+            print('to: ' + str([config['FLASKY_ADMIN'], "flaskaulasweb@zohomail.com"]), flush=True)
+            print('subject: ' + str(config['FLASKY_MAIL_SUBJECT_PREFIX']), flush=True)
+            print('text: ' + "Novo usuário cadastrado: " + form.name.data, flush=True)
+
+            if config['FLASKY_ADMIN']:
+                if is_sendable:
+                    to = [config['FLASKY_ADMIN'], "flaskaulasweb@zohomail.com"]
+                else:
+                    to = [config['FLASKY_ADMIN']]
+                print('Enviando mensagem...', flush=True)
+                send_simple_message(to, 'Novo usuário', form.name.data)
+                print('Mensagem enviada...', flush=True)
+        else:
+            session['known'] = True
+        session['name'] = form.name.data
+        return redirect(url_for('index'))
+    return render_template('index.html', form=form, name=session.get('name'),
+                           known=session.get('known', False), users=users)
