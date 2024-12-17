@@ -1,10 +1,6 @@
 
-from flasky import app, db, User, Role, render_template
+from flasky import render_template
 from . import main
-
-@main.shell_context_processor
-def make_shell_context():
-    return dict(db=db, User=User, Role=Role)
 
 
 @main.errorhandler(404)

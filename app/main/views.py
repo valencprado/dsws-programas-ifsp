@@ -1,6 +1,6 @@
 
 
-from flask import config, redirect, render_template, url_for, session
+from flask import redirect, render_template, url_for, session, current_app
 from .. import db, app
 from ..models import User, Role
 from ..email import User, Role, send_simple_message
@@ -21,15 +21,15 @@ def index():
             session['known'] = False
             is_sendable = form.is_sendable.data
             print('Verificando variáveis de ambiente: Server log do PythonAnyWhere', flush=True)
-            print('FLASKY_ADMIN: ' + str(config['FLASKY_ADMIN']), flush=True)
-            print('URL: ' + str(config['API_URL']), flush=True)
-            print('api: ' + str(config['API_KEY']), flush=True)
-            print('from: ' + str(config['API_FROM']), flush=True)
-            print('to: ' + str([config['FLASKY_ADMIN'], "flaskaulasweb@zohomail.com"]), flush=True)
+            print('FLASKY_ADMIN: ' + str(current_app.config['FLASKY_ADMIN']), flush=True)
+            print('URL: ' + str(current_app.config['API_URL']), flush=True)
+            print('api: ' + str(current_app.config['API_KEY']), flush=True)
+            print('from: ' + str(current_app.config['API_FROM']), flush=True)
+            print('to: ' + str(current_app.config['FLASKY_ADMIN'], "flaskaulasweb@zohomail.com"]), flush=True)
             print('subject: ' + str(config['FLASKY_MAIL_SUBJECT_PREFIX']), flush=True)
             print('text: ' + "Novo usuário cadastrado: " + form.name.data, flush=True)
 
-            if config['FLASKY_ADMIN']:
+            if current_app.config['FLASKY_ADMIN']:
                 print('Enviando mensagem...', flush=True)
                 send_simple_message(to, 'Novo usuário', form.name.data)
                 print('Mensagem enviada...', flush=True)
