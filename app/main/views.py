@@ -5,8 +5,9 @@ from .. import db, app
 from ..models import User, Role
 from ..email import User, Role, send_simple_message
 from .forms import NameForm
+from . import main
 
-@app.route('/', methods=['GET', 'POST'])
+@main.route('/', methods=['GET', 'POST'])
 def index():
     users = User.query.all()
     form = NameForm()
