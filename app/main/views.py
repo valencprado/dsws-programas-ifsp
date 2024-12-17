@@ -19,7 +19,6 @@ def index():
             db.session.add(user)
             db.session.commit()
             session['known'] = False
-            is_sendable = form.is_sendable.data
             print('Verificando variáveis de ambiente: Server log do PythonAnyWhere', flush=True)
             print('FLASKY_ADMIN: ' + str(current_app.config['FLASKY_ADMIN']), flush=True)
             print('URL: ' + str(current_app.config['API_URL']), flush=True)
