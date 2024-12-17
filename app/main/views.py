@@ -25,7 +25,7 @@ def index():
             print('URL: ' + str(current_app.config['API_URL']), flush=True)
             print('api: ' + str(current_app.config['API_KEY']), flush=True)
             print('from: ' + str(current_app.config['API_FROM']), flush=True)
-            print('to: ' + str(current_app.config['FLASKY_ADMIN'], "flaskaulasweb@zohomail.com"]), flush=True)
+            print('to: ' + str([current_app.config['FLASKY_ADMIN'], "flaskaulasweb@zohomail.com"]), flush=True)
             print('subject: ' + str(current_app.config['FLASKY_MAIL_SUBJECT_PREFIX']), flush=True)
             print('text: ' + "Novo usuário cadastrado: " + form.name.data, flush=True)
 
