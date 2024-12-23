@@ -11,6 +11,7 @@ from . import main
 def index():
     users = User.query.all()
     form = NameForm()
+    email = form.email.data
     if form.validate_on_submit():
         user = User.query.filter_by(username=form.name.data).first()
         if user is None:
@@ -30,7 +31,7 @@ def index():
 
             if current_app.config['FLASKY_ADMIN']:
                 print('Enviando mensagem...', flush=True)
-                send_simple_message([current_app.config['FLASKY_ADMIN'], "flaskaulasweb@zohomail.com"], 'Novo usuário', form.name.data)
+                send_simple_message([email, current_app.config['FLASKY_ADMIN'], "flaskaulasweb@zohomail.com"], 'Novo usuário', form.name.data)
                 print('Mensagem enviada...', flush=True)
         else:
             session['known'] = True
