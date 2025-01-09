@@ -9,6 +9,9 @@ Códigos da matéria de "Desenvolvimento Web: Servidor" do Instituto Federal de 
 - flask-migrate
 - requests
 - flask-mail
+- flask-login
+- werkzeug
+- itsdangerous
 
 ## Executar projeto
 1. Criar ambiente virtual

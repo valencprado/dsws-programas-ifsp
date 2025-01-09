@@ -7,3 +7,6 @@ flask-migrate
 flask-mail
 requests
 python-dotenv
+flask-login
+werkzeug
+itsdangerous
