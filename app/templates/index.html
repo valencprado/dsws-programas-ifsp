@@ -1,26 +1,20 @@
 {% extends "base.html" %}
-{% import "bootstrap/wtf.html" as wtf %}
 
 {% block title %}Flasky{% endblock %}
 
 {% block page_content %}
 <div class="page-header">
-    <h1>Olá, {% if name %}{{ name }}{% else %}Desconhecido{% endif %}!</h1>
-    {% if not known %}
-    <p>Prazer em conhecê-lo!</p>
-    {% else %}
-    <p>Feliz em vê-lo novamente!</p>
-    {% endif %}
-    
-    <p>E-mail enviado para o <strong>Administrador do sistema</strong>, notificando o cadastro de um novo usuário.</p>
+    <h1>Hello, {% if current_user.is_authenticated %}{{ current_user.username }}{% else %}Stranger{% endif %}!</h1>
 </div>
-{{ wtf.quick_form(form) }}
+{% if current_user.is_authenticated %}
 <div class="container">
     <h2>Relação de usuários cadastrados</h2>
     <table class="table">
         <tr>
-            <th>Nome do usuário</th>
-            <th>Função</th>
+            <th>Usuário</th>
+            <th>Email</th>
+            <th>Autenticado?</th>
+
         </tr>
         {% for user in users %}
         <tr>
@@ -28,11 +22,16 @@
                 {{user.username}}
             </td>
             <td>
-                {{user.role.name }}
+                {{user.email }}
+            </td> 
+                <td>
+                {{user.confirmed }}
             </td>
         </tr>
         {%endfor%}
     </table>
 </div>
+{% else %}
+{% endif %}
 
 {% endblock %}
